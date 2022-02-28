@@ -30,14 +30,14 @@ class Main23EGE(QMainWindow, Ui_MainWindow):
     def calculation_prepare(self):
         if not any(x for x in [self.move1.currentIndex(), self.move2.currentIndex(), self.move3.currentIndex()]):
             QtWidgets.QMessageBox.critical(self, 'Ошибка в командах', 'Не определено ни одной команды!',
-                            QtWidgets.QMessageBox.Ok)
+                                           QtWidgets.QMessageBox.Ok)
         else:
             start = self.spinStart.value()
             end = self.spinEnd.value()
             symbol_to_function = {'+': lambda x, y: x + y,
-                                    '*': lambda x, y: x * y,
-                                    'sqr': lambda x, y: x ** 2,
-                                     None: 0}
+                                  '*': lambda x, y: x * y,
+                                  'sqr': lambda x, y: x ** 2,
+                                  None: 0}
             if self.move1.currentIndex() == 1:
                 move1 = (symbol_to_function['+'], self.spinMove1.value())
             elif self.move1.currentIndex() == 2:
@@ -67,7 +67,7 @@ class Main23EGE(QMainWindow, Ui_MainWindow):
             required_points = []
             if self.lineEdit.text() != '':
                 try:
-                    required_points = list(x for x in map(int,self.lineEdit.text().split()))
+                    required_points = list(x for x in map(int, self.lineEdit.text().split()))
                     required_points.sort()
                 except:
                     self.lineEdit.setFocus()
@@ -103,12 +103,12 @@ class Main23EGE(QMainWindow, Ui_MainWindow):
                     try:
                         for i in range(intermediate_point_start, intermediate_point_end + 1):
                             if i not in intermediate_result.keys():
-                                intermediate_result[i] = calculate(intermediate_point_start, i, moves, blocked) *\
-                                    intermediate_coefficient
+                                intermediate_result[i] = calculate(intermediate_point_start, i, moves, blocked) * \
+                                                         intermediate_coefficient
                             else:
                                 intermediate_coefficient = intermediate_result[i]
-                                intermediate_result[i] = calculate(intermediate_point_start, i, moves, blocked) *\
-                                    intermediate_coefficient
+                                intermediate_result[i] = calculate(intermediate_point_start, i, moves, blocked) * \
+                                                         intermediate_coefficient
                         intermediate_coefficient = i
                         intermediate_point_start = intermediate_point_end
                     except:
@@ -124,8 +124,8 @@ class Main23EGE(QMainWindow, Ui_MainWindow):
                         intermediate_coefficient = intermediate_result[i]
                         intermediate_result[i] = calculate(intermediate_point_start, i, moves, blocked) * \
                                                  intermediate_coefficient
-                    intermediate_result[i] = calculate(intermediate_point_start, i, moves, blocked) *\
-                        intermediate_coefficient
+                    intermediate_result[i] = calculate(intermediate_point_start, i, moves, blocked) * \
+                                             intermediate_coefficient
                 self.result = intermediate_result
             self.AnswerLabel.setText(str(self.result[end]))
             self.item_list = []
